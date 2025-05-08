@@ -1,0 +1,100 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "ahelp"
+version = "0.0.0"
+description = "Because 'asyncio.gather()' is not enough!"
+license = "MIT"
+authors = ["Sergei Y. Bogdanov <syubogdanov@outlook.com>"]
+maintainers = ["Sergei Y. Bogdanov <syubogdanov@outlook.com>"]
+readme = "README.md"
+homepage = "https://github.com/syubogdanov/ahelp"
+repository = "https://github.com/syubogdanov/ahelp"
+documentation = "https://ahelp.readthedocs.io"
+keywords = [
+    "async",
+    "asyncio",
+    "concurrency",
+    "itertools",
+    "python",
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.14"
+
+[tool.poetry.group.lint]
+optional = true
+
+[tool.poetry.group.lint.dependencies]
+black = "~25.1"
+mypy = "~1.15"
+ruff = "~0.11"
+
+[tool.poetry.group.test]
+optional = true
+
+[tool.poetry.group.test.dependencies]
+pytest = "~8.3"
+pytest-asyncio = "~0.26"
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+skip-magic-trailing-comma = true
+
+[tool.mypy]
+allow_redefinition = true
+disallow_incomplete_defs = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+explicit_package_bases = true
+ignore_missing_imports = true
+no_implicit_optional = true
+python_version = "3.10"
+strict_equality = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.ruff]
+indent-width = 4
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+ignore = [
+    "COM812",  # Checks for the absence of trailing commas.
+    "D100",    # Missing docstring in public module.
+    "D104",    # Missing docstring in public package.
+]
+select = ["ALL"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    "S101",    # Checks for uses of the `assert` keyword.
+    "SLF001",  # Checks for accesses on "private" class members.
+]
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+lines-between-types = 1
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
